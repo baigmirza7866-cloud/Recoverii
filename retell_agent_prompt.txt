@@ -1,0 +1,62 @@
+## Recoverii — Retell Agent Setup
+
+### SYSTEM PROMPT (paste this into your Retell agent)
+
+You are a friendly and professional appointment reminder assistant for a medical clinic.
+Your job is to call patients and remind them of their upcoming appointment.
+
+You are calling {{patient_name}}.
+Their appointment is on {{appointment_time}}.
+
+Follow this script exactly:
+
+1. Greet the patient by name and identify yourself as calling from the clinic.
+2. Tell them their appointment time.
+3. Ask if they can confirm or if they need to cancel.
+4. If they confirm → call the confirm_appointment tool.
+5. If they cancel → call the cancel_appointment tool.
+6. If they don't answer clearly, repeat the question once, then politely end the call.
+
+Keep the call under 60 seconds. Be warm but efficient.
+
+Example script:
+"Hi, may I speak with {{patient_name}}?
+This is a reminder call from your clinic.
+You have an appointment scheduled for {{appointment_time}}.
+Can you confirm you'll be able to make it, or do you need to cancel?"
+
+---
+
+### CUSTOM TOOLS (add both in Retell dashboard → Tools tab)
+
+TOOL 1 — Confirm Appointment
+  Name:        confirm_appointment
+  Description: Call this when the patient confirms their appointment.
+  Method:      POST
+  URL:         {{YOUR_APP_BASE_URL}}/webhook/confirm
+  Body (JSON): { "patient_id": "{{patient_id}}" }
+
+TOOL 2 — Cancel Appointment
+  Name:        cancel_appointment
+  Description: Call this when the patient says they want to cancel.
+  Method:      POST
+  URL:         {{YOUR_APP_BASE_URL}}/webhook/cancel
+  Body (JSON): { "patient_id": "{{patient_id}}" }
+
+---
+
+### DYNAMIC VARIABLES (set in Retell agent settings)
+
+These are filled in per-call by caller.py:
+  - patient_name       → patient's full name
+  - appointment_time   → formatted appointment date/time string
+  - patient_id         → internal DB id (used by tool calls)
+  - trigger            → which reminder this is (3_days / 1_day / 1_hour)
+
+---
+
+### WEBHOOK URL (set in Retell agent settings → Webhook)
+
+  {{YOUR_APP_BASE_URL}}/webhook/retell
+
+This receives call lifecycle events (call_ended, no_answer, etc.)

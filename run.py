@@ -1,4 +1,3 @@
-"""Entry point — loads .env then starts the server."""
 from dotenv import load_dotenv
 load_dotenv()
 

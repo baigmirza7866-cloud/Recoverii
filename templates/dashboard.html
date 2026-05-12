@@ -2,84 +2,166 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="refresh" content="30" />
   <title>Recoverii — Clinic Dashboard</title>
   <style>
-    body { font-family: system-ui, sans-serif; max-width: 960px; margin: 40px auto; padding: 0 20px; background: #f9fafb; }
-    h1 { color: #1e3a5f; }
-    .stats { display: flex; gap: 16px; margin: 24px 0; }
-    .stat { background: white; border-radius: 8px; padding: 20px 28px; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
-    .stat-num { font-size: 2rem; font-weight: 700; color: #1e3a5f; }
-    .stat-label { font-size: .85rem; color: #666; margin-top: 4px; }
-    form { background: white; padding: 24px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,.08); margin-bottom: 32px; }
-    form h2 { margin-top: 0; }
-    label { display: block; margin-top: 12px; font-size: .9rem; color: #333; }
-    input { width: 100%; padding: 8px 10px; margin-top: 4px; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; box-sizing: border-box; }
-    button { margin-top: 16px; padding: 10px 24px; background: #1e3a5f; color: white; border: none; border-radius: 6px; font-size: 1rem; cursor: pointer; }
-    button:hover { background: #2a4f80; }
-    table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
-    th { background: #1e3a5f; color: white; padding: 12px 16px; text-align: left; font-size: .85rem; }
-    td { padding: 12px 16px; border-bottom: 1px solid #f0f0f0; font-size: .9rem; }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; max-width: 1100px; margin: 40px auto; padding: 0 24px; background: #f0f4f8; color: #1a202c; }
+    h1 { color: #1e3a5f; margin-bottom: 4px; font-size: 1.6rem; }
+    .subtitle { color: #718096; font-size: .9rem; margin-bottom: 28px; }
+
+    /* Stats */
+    .stats { display: flex; gap: 16px; margin-bottom: 28px; flex-wrap: wrap; }
+    .stat { background: white; border-radius: 10px; padding: 18px 24px; box-shadow: 0 1px 4px rgba(0,0,0,.07); min-width: 140px; }
+    .stat-num { font-size: 2rem; font-weight: 700; color: #1e3a5f; line-height: 1; }
+    .stat-label { font-size: .8rem; color: #718096; margin-top: 6px; }
+
+    /* Cards */
+    .card { background: white; border-radius: 10px; padding: 24px; box-shadow: 0 1px 4px rgba(0,0,0,.07); margin-bottom: 24px; }
+    .card h2 { margin-top: 0; font-size: 1.1rem; color: #2d3748; border-bottom: 1px solid #e2e8f0; padding-bottom: 12px; margin-bottom: 18px; }
+
+    /* Forms */
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 12px; align-items: end; }
+    label { font-size: .85rem; color: #4a5568; font-weight: 500; }
+    input[type=text], input[type=tel], input[type=datetime-local], input[type=file] {
+      display: block; width: 100%; padding: 9px 11px; margin-top: 5px;
+      border: 1px solid #cbd5e0; border-radius: 7px; font-size: .95rem;
+      background: #f7fafc; transition: border-color .15s;
+    }
+    input:focus { outline: none; border-color: #1e3a5f; background: white; }
+    .btn { padding: 10px 20px; border: none; border-radius: 7px; font-size: .9rem; cursor: pointer; font-weight: 600; }
+    .btn-primary { background: #1e3a5f; color: white; }
+    .btn-primary:hover { background: #2a4f80; }
+    .btn-sm { padding: 5px 12px; font-size: .8rem; border-radius: 5px; }
+    .btn-danger { background: #fed7d7; color: #c53030; }
+    .btn-danger:hover { background: #feb2b2; }
+
+    /* CSV import row */
+    .import-row { display: flex; gap: 12px; align-items: flex-end; margin-top: 16px; padding-top: 16px; border-top: 1px solid #e2e8f0; }
+    .import-row label { flex: 1; }
+
+    /* Table */
+    table { width: 100%; border-collapse: collapse; }
+    th { background: #1e3a5f; color: white; padding: 11px 14px; text-align: left; font-size: .82rem; font-weight: 600; letter-spacing: .03em; }
+    th:first-child { border-radius: 8px 0 0 0; }
+    th:last-child  { border-radius: 0 8px 0 0; }
+    td { padding: 11px 14px; border-bottom: 1px solid #edf2f7; font-size: .9rem; }
     tr:last-child td { border-bottom: none; }
-    .badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: .78rem; font-weight: 600; }
-    .pending   { background: #fef3c7; color: #92400e; }
-    .confirmed { background: #d1fae5; color: #065f46; }
-    .cancelled { background: #fee2e2; color: #991b1b; }
+    tr:hover td { background: #f7fafc; }
+
+    .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+    .pending   { background: #fefcbf; color: #744210; }
+    .confirmed { background: #c6f6d5; color: #22543d; }
+    .cancelled { background: #fed7d7; color: #742a2a; }
+
+    .progress { display: flex; gap: 4px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: #e2e8f0; }
+    .dot.done      { background: #48bb78; }
+    .dot.confirmed { background: #4299e1; }
+    .dot.no_answer { background: #fc8181; }
+
+    .empty { text-align: center; padding: 48px 0; color: #a0aec0; font-size: .95rem; }
+    .refresh-note { text-align: right; font-size: .78rem; color: #a0aec0; margin-top: 8px; }
   </style>
 </head>
 <body>
 
-<h1>Recoverii — Reminder Dashboard</h1>
+<h1>Recoverii</h1>
+<p class="subtitle">Clinic Appointment Reminder System &mdash; auto-refreshes every 30 seconds</p>
 
-<!-- Stats row -->
-{% set total = patients | length %}
+<!-- Stats -->
+{% set total     = patients | length %}
 {% set confirmed = patients | selectattr("status", "equalto", "confirmed") | list | length %}
+{% set cancelled = patients | selectattr("status", "equalto", "cancelled") | list | length %}
 {% set pending   = patients | selectattr("status", "equalto", "pending")   | list | length %}
+{% set total_calls = patients | sum(attribute="calls_made") %}
+
 <div class="stats">
   <div class="stat"><div class="stat-num">{{ total }}</div><div class="stat-label">Total Patients</div></div>
-  <div class="stat"><div class="stat-num">{{ confirmed }}</div><div class="stat-label">Confirmed</div></div>
-  <div class="stat"><div class="stat-num">{{ pending }}</div><div class="stat-label">Awaiting Response</div></div>
+  <div class="stat"><div class="stat-num" style="color:#22543d">{{ confirmed }}</div><div class="stat-label">Confirmed</div></div>
+  <div class="stat"><div class="stat-num" style="color:#744210">{{ pending }}</div><div class="stat-label">Pending</div></div>
+  <div class="stat"><div class="stat-num" style="color:#742a2a">{{ cancelled }}</div><div class="stat-label">Cancelled</div></div>
+  <div class="stat"><div class="stat-num">{{ total_calls }}</div><div class="stat-label">Calls Made</div></div>
 </div>
 
-<!-- Add patient form -->
-<form method="POST" action="/patients">
-  <h2>Add Patient Appointment</h2>
-  <label>Patient Name
-    <input type="text" name="name" placeholder="Jane Smith" required />
-  </label>
-  <label>Phone Number (E.164 format, e.g. +14155551234)
-    <input type="tel" name="phone" placeholder="+14155551234" required />
-  </label>
-  <label>Appointment Date &amp; Time
-    <input type="datetime-local" name="appointment_at" required />
-  </label>
-  <button type="submit">Add &amp; Schedule Reminders</button>
-</form>
+<!-- Add patient + CSV import -->
+<div class="card">
+  <h2>Add Patient</h2>
+  <form method="POST" action="/patients">
+    <div class="form-grid">
+      <label>Full Name
+        <input type="text" name="name" placeholder="Jane Smith" required />
+      </label>
+      <label>Phone (E.164 format)
+        <input type="tel" name="phone" placeholder="+14155551234" required />
+      </label>
+      <label>Appointment Date &amp; Time
+        <input type="datetime-local" name="appointment_at" required />
+      </label>
+      <div>
+        <button type="submit" class="btn btn-primary">Add &amp; Schedule</button>
+      </div>
+    </div>
+  </form>
+
+  <form method="POST" action="/patients/import" enctype="multipart/form-data">
+    <div class="import-row">
+      <label>Bulk Import via CSV &nbsp;<span style="color:#a0aec0;font-weight:400">(columns: name, phone, appointment_at)</span>
+        <input type="file" name="file" accept=".csv" required />
+      </label>
+      <button type="submit" class="btn btn-primary">Import CSV</button>
+    </div>
+  </form>
+</div>
 
 <!-- Patient table -->
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Phone</th>
-      <th>Appointment</th>
-      <th>Status</th>
-      <th>Calls Made</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for p in patients %}
-    <tr>
-      <td>{{ p.name }}</td>
-      <td>{{ p.phone }}</td>
-      <td>{{ p.appointment_at[:16].replace("T", " ") }}</td>
-      <td><span class="badge {{ p.status }}">{{ p.status }}</span></td>
-      <td>{{ p.calls_made }} / 3</td>
-    </tr>
-    {% else %}
-    <tr><td colspan="5" style="text-align:center; color:#999; padding:32px;">No patients yet. Add one above.</td></tr>
-    {% endfor %}
-  </tbody>
-</table>
+<div class="card">
+  <h2>Patients &amp; Call Status</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Appointment</th>
+        <th>Status</th>
+        <th>Calls (3 days / 1 day / 1 hr)</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for p in patients %}
+      <tr id="row-{{ p.id }}">
+        <td><strong>{{ p.name }}</strong></td>
+        <td>{{ p.phone }}</td>
+        <td>{{ p.appointment_at[:16].replace("T", " ") }}</td>
+        <td><span class="badge {{ p.status }}">{{ p.status }}</span></td>
+        <td>
+          <div class="progress">
+            <div class="dot {{ 'done' if p.calls_made >= 1 else '' }}" title="3-day call"></div>
+            <div class="dot {{ 'done' if p.calls_made >= 2 else '' }}" title="1-day call"></div>
+            <div class="dot {{ 'done' if p.calls_made >= 3 else '' }}" title="1-hour call"></div>
+          </div>
+        </td>
+        <td>
+          <button class="btn btn-sm btn-danger"
+                  onclick="deletePatient({{ p.id }}, '{{ p.name }}')">Remove</button>
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="6" class="empty">No patients yet. Add one above or import a CSV.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <p class="refresh-note">Page auto-refreshes every 30 seconds</p>
+</div>
+
+<script>
+  async function deletePatient(id, name) {
+    if (!confirm(`Remove ${name} and cancel all scheduled calls?`)) return;
+    await fetch(`/patients/${id}`, { method: "DELETE" });
+    document.getElementById(`row-${id}`).remove();
+  }
+</script>
 
 </body>
 </html>
