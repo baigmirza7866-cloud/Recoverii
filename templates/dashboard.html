@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Recoverii — Clinic Dashboard</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 960px; margin: 40px auto; padding: 0 20px; background: #f9fafb; }
+    h1 { color: #1e3a5f; }
+    .stats { display: flex; gap: 16px; margin: 24px 0; }
+    .stat { background: white; border-radius: 8px; padding: 20px 28px; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+    .stat-num { font-size: 2rem; font-weight: 700; color: #1e3a5f; }
+    .stat-label { font-size: .85rem; color: #666; margin-top: 4px; }
+    form { background: white; padding: 24px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,.08); margin-bottom: 32px; }
+    form h2 { margin-top: 0; }
+    label { display: block; margin-top: 12px; font-size: .9rem; color: #333; }
+    input { width: 100%; padding: 8px 10px; margin-top: 4px; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; box-sizing: border-box; }
+    button { margin-top: 16px; padding: 10px 24px; background: #1e3a5f; color: white; border: none; border-radius: 6px; font-size: 1rem; cursor: pointer; }
+    button:hover { background: #2a4f80; }
+    table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+    th { background: #1e3a5f; color: white; padding: 12px 16px; text-align: left; font-size: .85rem; }
+    td { padding: 12px 16px; border-bottom: 1px solid #f0f0f0; font-size: .9rem; }
+    tr:last-child td { border-bottom: none; }
+    .badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: .78rem; font-weight: 600; }
+    .pending   { background: #fef3c7; color: #92400e; }
+    .confirmed { background: #d1fae5; color: #065f46; }
+    .cancelled { background: #fee2e2; color: #991b1b; }
+  </style>
+</head>
+<body>
+
+<h1>Recoverii — Reminder Dashboard</h1>
+
+<!-- Stats row -->
+{% set total = patients | length %}
+{% set confirmed = patients | selectattr("status", "equalto", "confirmed") | list | length %}
+{% set pending   = patients | selectattr("status", "equalto", "pending")   | list | length %}
+<div class="stats">
+  <div class="stat"><div class="stat-num">{{ total }}</div><div class="stat-label">Total Patients</div></div>
+  <div class="stat"><div class="stat-num">{{ confirmed }}</div><div class="stat-label">Confirmed</div></div>
+  <div class="stat"><div class="stat-num">{{ pending }}</div><div class="stat-label">Awaiting Response</div></div>
+</div>
+
+<!-- Add patient form -->
+<form method="POST" action="/patients">
+  <h2>Add Patient Appointment</h2>
+  <label>Patient Name
+    <input type="text" name="name" placeholder="Jane Smith" required />
+  </label>
+  <label>Phone Number (E.164 format, e.g. +14155551234)
+    <input type="tel" name="phone" placeholder="+14155551234" required />
+  </label>
+  <label>Appointment Date &amp; Time
+    <input type="datetime-local" name="appointment_at" required />
+  </label>
+  <button type="submit">Add &amp; Schedule Reminders</button>
+</form>
+
+<!-- Patient table -->
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Phone</th>
+      <th>Appointment</th>
+      <th>Status</th>
+      <th>Calls Made</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for p in patients %}
+    <tr>
+      <td>{{ p.name }}</td>
+      <td>{{ p.phone }}</td>
+      <td>{{ p.appointment_at[:16].replace("T", " ") }}</td>
+      <td><span class="badge {{ p.status }}">{{ p.status }}</span></td>
+      <td>{{ p.calls_made }} / 3</td>
+    </tr>
+    {% else %}
+    <tr><td colspan="5" style="text-align:center; color:#999; padding:32px;">No patients yet. Add one above.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+</body>
+</html>
