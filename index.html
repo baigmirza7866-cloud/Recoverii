@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Pilsen Barbershop — Classic cuts, hot shaves, and old-school service in the heart of Pilsen, Chicago. Open 7 days a week." />
+  <title>Pilsen Barbershop | Classic Cuts in Chicago's Pilsen Neighborhood</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ── NAV ──────────────────────────────────────────────────────────────── -->
+<header id="header">
+  <nav class="nav container">
+    <a href="#" class="nav-logo">PILSEN<span>BARBERSHOP</span></a>
+    <button class="nav-toggle" aria-label="Open menu" onclick="toggleMenu()">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#services" onclick="closeMenu()">Services</a></li>
+      <li><a href="#about"    onclick="closeMenu()">About</a></li>
+      <li><a href="#gallery"  onclick="closeMenu()">Gallery</a></li>
+      <li><a href="#reviews"  onclick="closeMenu()">Reviews</a></li>
+      <li><a href="#contact"  onclick="closeMenu()">Find Us</a></li>
+      <li><a href="https://www.fresha.com/lvp/pilsen-barbershop-inc-west-cermak-road-chicago-wXRKAo"
+             target="_blank" class="btn-nav" onclick="closeMenu()">Book Now</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ── HERO ─────────────────────────────────────────────────────────────── -->
+<section class="hero" id="home">
+  <div class="hero-overlay"></div>
+  <div class="hero-content container">
+    <p class="hero-tag">Est. in the Heart of Pilsen · Chicago, IL</p>
+    <h1>Sharp Cuts.<br>Old-School Pride.</h1>
+    <p class="hero-sub">
+      Classic barbershop service — walk-ins welcome, seven days a week.
+      2646 W Cermak Rd, Chicago.
+    </p>
+    <div class="hero-ctas">
+      <a href="https://www.fresha.com/lvp/pilsen-barbershop-inc-west-cermak-road-chicago-wXRKAo"
+         target="_blank" class="btn btn-primary">Book an Appointment</a>
+      <a href="tel:+17735920042" class="btn btn-outline">(773) 592-0042</a>
+    </div>
+    <div class="hero-hours">
+      <span class="dot green"></span> Open Today · Mon–Sun 9:00 AM – 7:00 PM
+    </div>
+  </div>
+  <div class="hero-scroll" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">
+    <span>↓</span>
+  </div>
+</section>
+
+<!-- ── STRIP ─────────────────────────────────────────────────────────────── -->
+<div class="strip">
+  <div class="container strip-inner">
+    <div class="strip-item"><strong>Walk-Ins Welcome</strong><span>No appointment needed</span></div>
+    <div class="strip-divider"></div>
+    <div class="strip-item"><strong>Open 7 Days</strong><span>9 AM – 7 PM daily</span></div>
+    <div class="strip-divider"></div>
+    <div class="strip-item"><strong>Pilsen Neighborhood</strong><span>2646 W Cermak Rd</span></div>
+    <div class="strip-divider"></div>
+    <div class="strip-item"><strong>Cash &amp; Card</strong><span>Accepted</span></div>
+  </div>
+</div>
+
+<!-- ── SERVICES ──────────────────────────────────────────────────────────── -->
+<section class="section" id="services">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-tag">What We Do</p>
+      <h2>Our Services</h2>
+      <p class="section-sub">Straight-razor precision and the kind of craft that never goes out of style.</p>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">✂</div>
+        <h3>Men's Haircut</h3>
+        <p>Fade, taper, classic cut — however you want it, done right.</p>
+        <div class="service-price">$25</div>
+      </div>
+      <div class="service-card featured">
+        <div class="service-badge">Most Popular</div>
+        <div class="service-icon">🪒</div>
+        <h3>Haircut + Beard Trim</h3>
+        <p>Full cut with a clean lineup and beard shape-up included.</p>
+        <div class="service-price">$35</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🧔</div>
+        <h3>Beard Trim</h3>
+        <p>Precision shaping and edge-up for a clean, defined beard.</p>
+        <div class="service-price">$15</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">💈</div>
+        <h3>Hot Towel Shave</h3>
+        <p>Traditional straight-razor shave with hot towel treatment.</p>
+        <div class="service-price">$30</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">👦</div>
+        <h3>Kids Haircut</h3>
+        <p>For boys 12 and under. Patient barbers, great results.</p>
+        <div class="service-price">$20</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🪄</div>
+        <h3>Head Shave</h3>
+        <p>Clean, smooth head shave with a hot towel finish.</p>
+        <div class="service-price">$25</div>
+      </div>
+    </div>
+
+    <p class="services-note">All services include complimentary neck shave and lineup. Walk-ins always welcome — or <a href="https://www.fresha.com/lvp/pilsen-barbershop-inc-west-cermak-road-chicago-wXRKAo" target="_blank">book ahead online</a>.</p>
+  </div>
+</section>
+
+<!-- ── ABOUT ─────────────────────────────────────────────────────────────── -->
+<section class="section section-dark" id="about">
+  <div class="container about-layout">
+    <div class="about-visual">
+      <div class="about-img-wrap">
+        <div class="about-img-block top"></div>
+        <div class="about-img-block bottom"></div>
+        <div class="about-badge-float">
+          <span class="badge-num">7</span>
+          <span class="badge-text">Days a Week</span>
+        </div>
+      </div>
+    </div>
+    <div class="about-text">
+      <p class="section-tag">Our Story</p>
+      <h2>Pilsen's Neighborhood Barbershop</h2>
+      <p>
+        We've been cutting hair right here on Cermak Road for years, serving the families,
+        workers, and community of Pilsen and the surrounding South Side neighborhoods.
+        This is more than a haircut — it's the chair you come back to.
+      </p>
+      <p>
+        Our barbers bring old-school technique with modern precision. No rush, no shortcuts.
+        Every client walks out looking clean and feeling good. That's the standard we hold
+        ourselves to every single day.
+      </p>
+      <ul class="about-list">
+        <li>✓ Walk-ins always welcome</li>
+        <li>✓ Experienced, licensed barbers</li>
+        <li>✓ Serving the Pilsen community</li>
+        <li>✓ Open every day of the week</li>
+      </ul>
+      <a href="tel:+17735920042" class="btn btn-primary">Call Us: (773) 592-0042</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── GALLERY ────────────────────────────────────────────────────────────── -->
+<section class="section" id="gallery">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-tag">The Work</p>
+      <h2>Fresh Cuts Only</h2>
+      <p class="section-sub">Every chair, every cut — we take pride in the craft.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item g-tall" style="background-color:#1a1a1a">
+        <div class="gallery-placeholder">
+          <span class="gallery-icon">✂</span>
+          <span>Classic Fade</span>
+        </div>
+      </div>
+      <div class="gallery-item" style="background-color:#2c2c2c">
+        <div class="gallery-placeholder">
+          <span class="gallery-icon">💈</span>
+          <span>Taper + Lineup</span>
+        </div>
+      </div>
+      <div class="gallery-item" style="background-color:#111">
+        <div class="gallery-placeholder">
+          <span class="gallery-icon">🪒</span>
+          <span>Beard Shape-Up</span>
+        </div>
+      </div>
+      <div class="gallery-item g-wide" style="background-color:#222">
+        <div class="gallery-placeholder">
+          <span class="gallery-icon">🪄</span>
+          <span>The Shop</span>
+        </div>
+      </div>
+      <div class="gallery-item" style="background-color:#1e1e1e">
+        <div class="gallery-placeholder">
+          <span class="gallery-icon">✂</span>
+          <span>Skin Fade</span>
+        </div>
+      </div>
+    </div>
+    <p class="gallery-note">Follow us on Instagram for the latest cuts →
+      <a href="https://instagram.com" target="_blank">@pilsenbarbershop</a>
+    </p>
+  </div>
+</section>
+
+<!-- ── REVIEWS ────────────────────────────────────────────────────────────── -->
+<section class="section section-accent" id="reviews">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-tag">What Clients Say</p>
+      <h2>Real Reviews</h2>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p>"Best barbershop in Pilsen. My barber has been cutting my hair for years and always
+        delivers. The vibe is great — it feels like a real neighborhood shop."</p>
+        <div class="review-author">
+          <div class="review-avatar">MR</div>
+          <div><strong>Miguel R.</strong><span>Pilsen, Chicago</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p>"Walked in without an appointment and was in the chair within 10 minutes. Clean fade,
+        great beard trim. Price is fair and the barbers know what they're doing."</p>
+        <div class="review-author">
+          <div class="review-avatar">JL</div>
+          <div><strong>Jose L.</strong><span>Little Village, Chicago</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p>"Brought my son here for his first real haircut. The barber was patient and did an
+        amazing job. We're regulars now. Can't recommend enough."</p>
+        <div class="review-author">
+          <div class="review-avatar">CG</div>
+          <div><strong>Carlos G.</strong><span>Bridgeport, Chicago</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="review-cta">
+      <a href="https://www.yelp.com/biz/pilsen-barbershop-inc-chicago" target="_blank" class="btn btn-outline-dark">See All Reviews on Yelp</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ────────────────────────────────────────────────────────────── -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-tag">Come See Us</p>
+      <h2>Hours &amp; Location</h2>
+    </div>
+    <div class="contact-layout">
+      <div class="contact-info">
+        <div class="info-block">
+          <h3>📍 Address</h3>
+          <p>2646 W Cermak Rd<br>Chicago, IL 60608<br><em>Pilsen Neighborhood</em></p>
+          <a href="https://maps.google.com/?q=2646+W+Cermak+Rd+Chicago+IL+60608" target="_blank" class="btn btn-sm btn-primary">Get Directions</a>
+        </div>
+        <div class="info-block">
+          <h3>🕐 Hours</h3>
+          <table class="hours-table">
+            <tr><td>Monday</td><td>9:00 AM – 7:00 PM</td></tr>
+            <tr><td>Tuesday</td><td>9:00 AM – 7:00 PM</td></tr>
+            <tr><td>Wednesday</td><td>9:00 AM – 7:00 PM</td></tr>
+            <tr><td>Thursday</td><td>9:00 AM – 7:00 PM</td></tr>
+            <tr><td>Friday</td><td>9:00 AM – 7:00 PM</td></tr>
+            <tr><td>Saturday</td><td>9:00 AM – 7:00 PM</td></tr>
+            <tr><td>Sunday</td><td>9:00 AM – 7:00 PM</td></tr>
+          </table>
+        </div>
+        <div class="info-block">
+          <h3>📞 Contact</h3>
+          <p><a href="tel:+17735920042" class="contact-phone">(773) 592-0042</a></p>
+          <p style="color:#666;font-size:.9rem">Walk-ins welcome anytime during business hours.</p>
+        </div>
+      </div>
+      <div class="contact-map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2972.0!2d-87.6924!3d41.8494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880e2ce0f0c0c0c1%3A0x1!2s2646+W+Cermak+Rd%2C+Chicago%2C+IL+60608!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus"
+          width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade" title="Pilsen Barbershop location map">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BOOKING CTA ────────────────────────────────────────────────────────── -->
+<section class="booking-cta">
+  <div class="container booking-cta-inner">
+    <div>
+      <h2>Ready for a Fresh Cut?</h2>
+      <p>Walk in anytime or book ahead to skip the wait.</p>
+    </div>
+    <div class="booking-cta-actions">
+      <a href="https://www.fresha.com/lvp/pilsen-barbershop-inc-west-cermak-road-chicago-wXRKAo"
+         target="_blank" class="btn btn-primary btn-lg">Book Online</a>
+      <a href="tel:+17735920042" class="btn btn-outline btn-lg">Call Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <p class="footer-logo">PILSEN<span>BARBERSHOP</span></p>
+      <p>2646 W Cermak Rd · Chicago, IL 60608</p>
+      <p>(773) 592-0042</p>
+    </div>
+    <div class="footer-links">
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Location</a>
+    </div>
+    <div class="footer-social">
+      <p>Open Mon–Sun · 9 AM – 7 PM</p>
+      <a href="https://www.fresha.com/lvp/pilsen-barbershop-inc-west-cermak-road-chicago-wXRKAo"
+         target="_blank" class="btn btn-sm btn-primary">Book Now</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Pilsen Barbershop, Inc. · Chicago, IL</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
